@@ -9,7 +9,7 @@ assignees: ''
 
 [Device Name]
 
-- [] Does it work?
-- [] Does it look good?
-- [] Is it practical?
+- [ ] Does it work?
+- [ ] Does it look good?
+- [ ] Is it practical?
 Any final comments? [Add your comment here]
