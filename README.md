@@ -24,7 +24,7 @@ Susdeck has not had many devices tested on it. Information on how to contribute 
 | Tested Device      | Does it work? | Is it practical? | Does it look good? | Final Notes                                  |
 |--------------------|---------------|------------------|--------------------|----------------------------------------------|
 | iPod Touch 7th Gen | Yes.          | Yes.             | Yes.               | Susdeck was made for the iPod Touch 7th gen  |
-| iPhone 12          | Yes.          | Yes.             | Sort of.           | There's a border making the background funky |
+| iPhone 12          | Yes.          | Yes.             | Ye.           | No comment |
 
 ## Closing Notes
 Do not mind the occasional reference to 'Onyx', that is a super not secret codename for Susdeck.
