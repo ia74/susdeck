@@ -25,6 +25,6 @@ Susdeck has not had many devices tested on it. Information on how to contribute 
 |--------------------|---------------|------------------|--------------------|----------------------------------------------|
 | iPod Touch 7th Gen | Yes.          | Yes.             | Yes.               | Susdeck was made for the iPod Touch 7th gen  |
 | iPhone 12          | Yes.          | Yes.             | Yes.           | No comment |
-
+| Desktop         | Yes.          | No.             | Meh.           | Susdeck is made for touchscreen devices when you can't instantly press a key. |
 ## Closing Notes
 Do not mind the occasional reference to 'Onyx', that is a super not secret codename for Susdeck.
