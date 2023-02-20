@@ -1,3 +1,13 @@
+// Welcome to the sound config. Here this should be pretty self explanatory.
+// Keys for a macro, one at a time
+// Key for 1 key (f24)
+// Name for display name
+// Icon is not required, but if you want to I recommend 100x100px png in black and white. You can do whatever though!
+
+// But first, do you want a feedback (press.mp3) played on button pressed?
+var SoundOnPress = true;
+// true for yes, false for no.
+
 var _sounds = [
     [{
         name: 'Shooting',

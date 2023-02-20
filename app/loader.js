@@ -8,6 +8,7 @@ loadPage(0)
 const allKeypress = document.getElementsByClassName('keypress');
 for (let i = 0; i < allKeypress.length; i++) {
     allKeypress[i].onclick = (ev) => {
+        if(SoundOnPress) new Audio('press.mp3').play();
         socket.emit('keypress', allKeypress[i].getAttribute('data-key'))
     }
 }
