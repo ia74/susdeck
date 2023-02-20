@@ -8,12 +8,11 @@ loadPage(0)
 const allKeypress = document.getElementsByClassName('keypress');
 for (let i = 0; i < allKeypress.length; i++) {
     allKeypress[i].onclick = (ev) => {
-        console.log('key press')
-        socket.emit('kp', allKeypress[i].getAttribute('data-key'))
+        socket.emit('keypress', allKeypress[i].getAttribute('data-key'))
     }
 }
 
-socket.on('indaclub', function () {
+socket.on('server_connected', function () {
     document.getElementById('loading').style.display = "none"
 })
 
@@ -75,11 +74,3 @@ function loadPage(pageNumber) {
     keys.appendChild(susdeck);
     
 }
-
-(function(){
-    var oldLog = console.log;
-    console.log = function (message) {
-        document.getElementById('console').innerText+=message+"\n"
-        oldLog.apply(console, arguments);
-    };
-})();

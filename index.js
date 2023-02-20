@@ -9,8 +9,8 @@ app.use('/', ex.static('app'))
 
 io.on('connection', (socket) => {
   console.log('Connected to client @ '+new Date())
-  setTimeout(function(){socket.emit('indaclub')},150);
-  socket.on('kp', keys => {
+  setTimeout(function(){socket.emit('server_connected')},150);
+  socket.on('keypress', keys => {
     if(keys.includes('{')) {
       keys.split('{').forEach(key => {
         if(key == '') return;
