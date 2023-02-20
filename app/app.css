@@ -12,6 +12,8 @@ body {
     -moz-animation: errorBg 5s linear infinite;
     animation: errorBg 5s linear infinite;
     height: 100vh;
+    width: 100vw;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 * {
