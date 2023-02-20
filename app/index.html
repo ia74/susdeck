@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Susdeck App</title>
+    <meta content="Susdeck" property="og:title" />
+    <meta content="Meant to be viewed on a phone ( a sus deck ) but ok.." property="og:description" />
+    <meta content="http://192.168.5.41:3000" property="og:url" />
+    <meta content="#43B581" data-react-helmet="true" name="theme-color" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Onyx">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+  <div id="loading">
+    <h1>Susdeck</h1>
+    <p>Waiting for websocket to connect..</p>
+    <div id="console"></div>
+  </div>
+  <noscript>
+    How are you seeing this?
+  </noscript>
+  <div id="keys"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="sounds.js"></script>
+  <script src="loader.js"></script>
+</body>
+
+</html>
