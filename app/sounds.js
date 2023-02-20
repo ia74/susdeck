@@ -44,6 +44,7 @@ var _sounds = [
         keys: [
             'alt',
             'tab',
-        ]
+        ],
+        icon: 'alt_tab.png'
     }]
 ]
