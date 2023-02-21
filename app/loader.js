@@ -9,11 +9,7 @@ addToHTMLlog('Waiting for server...')
 
 socket.on('greenlight', function () {
     document.getElementById('loading').style.display = "none"
-    if(localStorage.getItem('_sdpage')) {
-        loadPage(localStorage.getItem('_sdpage'))
-    } else {
-        loadPage(0)
-    }
+    loadPage(0)
 })
 
 socket.on('banish', function () {
@@ -113,11 +109,12 @@ function loadPage(pageNumber) {
     })
 
     let sbtn = document.createElement('button');
-    sbtn.className = "keypress";
+    sbtn.className = "keypress btxt";
     sbtn.setAttribute('data-key', 'f19');
     sbtn.innerText = "Stop All";
     let reloadbtn = document.createElement('button');
     reloadbtn.onclick = () => { window.location.reload() };
+    reloadbtn.className= "btxt";
     reloadbtn.innerText = "Reload";
     let susdeck = document.createElement('a');
     susdeck.className = "button"
