@@ -23,7 +23,24 @@ Now your computer is hosting a server on port 3000. Get any iOS device and go to
 Now, add the app to your home screen by pressing the share button.  
 Next, open the app on your device. It will be full screen.  
 **Susdeck is best viewed in landscape/horizontal mode.**  
-There are preloaded keys, for example `Shooting` will press Alt+F24 - it is meant to be a keybind in a soundboard.
+There are preloaded keys, for example `Shooting` will press Alt+F24 - it is meant to be a keybind in a soundboard.  
+
+## But I have more than *9* macros, how can I fix this?
+The `sounds.js` file includes an example for multiple pages. An example of a new page with 1 sound would be 
+```js
+[
+        {
+            name: 'What The Dog Doin?',
+            keys: [
+                'alt',
+                'f4'
+            ],
+            // *Common sense!* As a warning do not use alt+f4 as an actual keybind. It will close your running program! This is just an example of a new page.
+            icon: 'susdeck.png'
+        }
+    ]
+```
+and to add this as it's own page it's as simple as finding the closing `]`, adding a comma to it `],` and pasting this in and repeating the macros as needed!
 
 ## How do I make my own sounds/macros?
 Susdeck processes keys at the front-end, and it uses robotjs to press them on your computer.  
