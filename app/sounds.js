@@ -59,5 +59,12 @@ var Pages = [
             'tab',
         ],
         icon: 'alt_tab.png'
-    }]
+    }],
+    [
+        {
+            name: 'Test page',
+            key: 'control',
+            icon: 'susdeck.png'
+        }
+    ]
 ]

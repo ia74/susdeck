@@ -3,6 +3,7 @@ var keys = document.getElementById('keys');
 var keyList = [];
 var loaded = false;
 var loggedin = false;
+var currentPage = 0;
 
 addToHTMLlog('Waiting for server...')
 
@@ -48,6 +49,35 @@ function addToHTMLlog(text) {
     document.getElementById('console').innerText += text + '\n';
 }
 
+let touchstartX = 0
+let touchendX = 2500
+    
+function checkDirection() {
+  if (touchendX < touchstartX) {
+    // go page up
+    if(Pages[currentPage+1]) {
+        loadPage(currentPage+1)
+    } else {
+    }
+  }
+  if (touchendX > touchstartX) {
+    // go page down
+    if(Pages[currentPage-1]) {
+        loadPage(currentPage-1)
+    } else {
+    }
+  }
+}
+
+document.addEventListener('touchstart', e => {
+  touchstartX = e.changedTouches[0].screenX
+})
+
+document.addEventListener('touchend', e => {
+  touchendX = e.changedTouches[0].screenX
+  checkDirection()
+})
+
 setInterval(function () {
     // Auto refresh, you shouldn't be waiting to connect for longer than 500ms.
     if (loaded) return;
@@ -57,6 +87,7 @@ setInterval(function () {
 
 
 function loadPage(pageNumber) {
+    currentPage = pageNumber;
     keyList = [];
     const myNode = document.getElementById("keys");
     while (myNode.firstChild) {
@@ -82,23 +113,6 @@ function loadPage(pageNumber) {
         btn.innerText = sound.name;
         keys.appendChild(btn)
     })
-    if (Pages[pageNumber + 1] && pageNumber == 0) {
-        let np = document.createElement('button');
-        np.onclick = () => { loadPage(pageNumber + 1) };
-        np.innerText = "Next Page";
-        keys.appendChild(np);
-    }
-    if (Pages[pageNumber - 1]) {
-        let np = document.createElement('button');
-        np.onclick = () => { loadPage(pageNumber + 1) };
-        np.innerText = "Next Page";
-
-        let Bp = document.createElement('button');
-        Bp.onclick = () => { loadPage(pageNumber - 1) };
-        Bp.innerText = "Back";
-        keys.appendChild(Bp);
-        keys.appendChild(np);
-    }
 
     let sbtn = document.createElement('button');
     sbtn.className = "keypress";
