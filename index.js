@@ -3,12 +3,17 @@ const app = ex();
 const http = require('http').Server(app);
 const rob = require('robotjs');
 const io = require('socket.io')(http);
+const settings = require('./Settings')
 const port = process.env.PORT || 3000;
+
+let loginList = [];
+let sessions = [];
 
 app.use('/', ex.static('app'))
 
 io.on('connection', (socket) => {
   console.log('Connected to client @ '+new Date())
+
   setTimeout(function(){socket.emit('server_connected')},150);
   socket.on('keypress', keys => {
     if(keys.includes('{')) {
@@ -22,6 +27,46 @@ io.on('connection', (socket) => {
       rob.keyTap(keys)
     }
   });
+
+  socket.on('c2sr_login_cont', (sid) => {
+    if(loginList.includes(sid)) {
+      // Indeed it is the same user logging in.
+      loginList.splice(loginList.indexOf(sid), 1)
+      // Hello
+      console.log("User "+sid+" acknowledged login continuation.")
+      socket.emit('hiuser')
+    }
+  })
+  socket.on('c2sd_login', (password) => {
+    console.log('Recieved password',password)
+    if(password == settings.Password) {
+      console.log(password+" at "+settings.Password)
+      // Congratulations, now let's assign a session id.
+      sid = require('crypto').randomBytes(8).toString('hex');
+      console.log('Adding '+sid+" to session ids")
+      sessions.push(sid)
+      socket.emit('s2cs_login', sid, "../")
+
+    }
+  })
+  socket.on('c2sr_login', (sid) => {
+    
+      // ID recieved, load into memory so we know it's the same user logging in.
+      loginList.push(sid);
+      console.log("User "+sid+" requested login!")
+      // We'll confirm that we want to take user to the login page.
+      socket.emit('s2ca_login', 'internal/Login.html')
+
+  })
+  socket.on('Authenticated', (sessionID) => {
+    console.log("Recieved "+sessionID, ", checking..")
+    if(sessions.includes(sessionID)) {
+      console.log(sessionID, "is valid!")
+      socket.emit('greenlight')
+    } else {
+
+    }
+  })
 });
 
 http.listen(port, () => {

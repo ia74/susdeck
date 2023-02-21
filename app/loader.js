@@ -1,28 +1,65 @@
 var socket = io();
-var pages = [];
 var keys = document.getElementById('keys');
+var keyList = [];
+var loaded = false;
+var loggedin = false;
 
-_sounds.forEach(page => { pages.push(page) })
-loadPage(0)
+addToHTMLlog('Waiting for server...')
 
 const allKeypress = document.getElementsByClassName('keypress');
 for (let i = 0; i < allKeypress.length; i++) {
     allKeypress[i].onclick = (ev) => {
-        if(SoundOnPress) new Audio('press.mp3').play();
+        if (SoundOnPress) new Audio('press.mp3').play();
         socket.emit('keypress', allKeypress[i].getAttribute('data-key'))
     }
 }
 
-socket.on('server_connected', function () {
+socket.on('greenlight', function() {
     document.getElementById('loading').style.display = "none"
+    loadPage(0)
 })
 
+socket.on('server_connected', function () {
+    // _sdsession is session id
+    addToHTMLlog("Connected! Checking for login status..")
+    if(localStorage.getItem('_sdsession')) {
+        socket.emit('Authenticated', localStorage.getItem('_sdsession'))
+        addToHTMLlog('Success! You\'re logged in.')
+        loaded = true;
+
+    } else {
+    addToHTMLlog('Not logged in, requesting login')
+    loaded = true;
+    localStorage.setItem('_sdsid',Math.random().toString().substring(2,5))
+    socket.emit('c2sr_login',localStorage.getItem("_sdsid"))
+    }
+})
+socket.on('s2ca_login', function (s) {
+    addToHTMLlog('Request received by server, let\'s log in.')
+    window.location.href = s;
+})
+
+function addToHTMLlog(text) {
+    document.getElementById('console').innerText += text+'\n';
+}
+
+setInterval(function() {
+    // Auto refresh, you shouldn't be waiting to connect for longer than 500ms.
+    if(loaded) return;
+    addToHTMLlog('Connection attempt timed out. Retrying...')
+    window.location.reload();
+},500)
+
+
 function loadPage(pageNumber) {
+    keyList = [];
     const myNode = document.getElementById("keys");
     while (myNode.firstChild) {
         myNode.removeChild(myNode.lastChild);
     }
-    pages[pageNumber].forEach(sound => {
+
+    Pages[pageNumber].forEach(sound => {
+        keyList.push(sound);
         let btn = document.createElement('button');
         btn.className = "keypress";
         if (sound.key) {
@@ -34,21 +71,19 @@ function loadPage(pageNumber) {
             })
             btn.setAttribute('data-key', txt);
         }
-        if(sound.icon) {
-            btn.style.backgroundImage = "url('icons/"+sound.icon+"')"
+        if (sound.icon) {
+            btn.style.backgroundImage = "url('icons/" + sound.icon + "')"
         }
         btn.innerText = sound.name;
         keys.appendChild(btn)
     })
-    if (pages[pageNumber + 1]) {
-        if (pageNumber == 0) {
-            let np = document.createElement('button');
-            np.onclick = () => { loadPage(pageNumber + 1) };
-            np.innerText = "Next Page";
-            keys.appendChild(np);
-        }
+    if (Pages[pageNumber + 1] && pageNumber == 0) {
+        let np = document.createElement('button');
+        np.onclick = () => { loadPage(pageNumber + 1) };
+        np.innerText = "Next Page";
+        keys.appendChild(np);
     }
-    if (pages[pageNumber - 1]) {
+    if (Pages[pageNumber - 1]) {
         let np = document.createElement('button');
         np.onclick = () => { loadPage(pageNumber + 1) };
         np.innerText = "Next Page";
@@ -68,10 +103,10 @@ function loadPage(pageNumber) {
     reloadbtn.onclick = () => { window.location.reload() };
     reloadbtn.innerText = "Reload";
     let susdeck = document.createElement('a');
-    susdeck.className="button"
-    susdeck.style.backgroundImage="url('icons/susdeck.png')"
+    susdeck.className = "button"
+    susdeck.style.backgroundImage = "url('icons/susdeck.png')"
     keys.appendChild(reloadbtn);
     keys.appendChild(sbtn);
     keys.appendChild(susdeck);
-    
+
 }

@@ -11,23 +11,21 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Susdeck">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="../app.css">
 </head>
 
 <body>
   <div id="loading">
     <h1>Susdeck</h1>
-    <p>Please wait a second...</p>
-    <button onclick="localStorage.setItem('_sdsession',''); window.location.reload()">Reset Session</button>
     <div id="console"></div>
   </div>
-  <noscript>
-    How are you seeing this?
-  </noscript>
-  <div id="keys"></div>
+  <div id="login" style="display:none">
+    <h1>Login to Susdeck</h1>
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="submit()">Login</button>
+  </div>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="sounds.js"></script>
-  <script src="loader.js"></script>
+  <script src="logmein.js"></script>
 </body>
 
 </html>

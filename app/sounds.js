@@ -8,10 +8,13 @@
 var SoundOnPress = true;
 // true for yes, false for no.
 
-var _sounds = [
+var Pages = [
     [{
         name: 'Shooting',
-        key: 'f24',
+        keys: [
+            'alt',
+            'f24'
+        ],
         icon: 'shooting.png'
     },
     {
