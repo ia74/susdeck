@@ -2,9 +2,8 @@ var socket = io();
 
 addToHTMLlog('Waiting for server to respond to login request continuation')
 socket.on('server_connected', function () {
-    addToHTMLlog('Connected! Requesting login!')
+    addToHTMLlog('Connected! Requesting login as '+localStorage.getItem("_sdsid")+'!')
     loaded = true;
-    addToHTMLlog(localStorage.getItem("_sdsid"))
     socket.emit('c2sr_login_cont', localStorage.getItem('_sdsid'))
     // document.getElementById('loading').style.display = "none"
 })
@@ -12,6 +11,7 @@ socket.on('hiuser', function (s) {
     addToHTMLlog('Loading login form..')
     setTimeout(() => {
         document.getElementById('loading').style.display = 'none'
+        document.getElementById('sdl').innerText = localStorage.getItem('_sdl')
         document.getElementById('login').style.display = 'block'
     }, 500);
 })

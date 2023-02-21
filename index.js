@@ -50,13 +50,12 @@ io.on('connection', (socket) => {
     }
   })
   socket.on('c2sr_login', (sid) => {
-    
+    if(!settings.UseAuthentication) {socket.emit('greenlight'); return;}
       // ID recieved, load into memory so we know it's the same user logging in.
       loginList.push(sid);
       console.log("User "+sid+" requested login!")
       // We'll confirm that we want to take user to the login page.
-      socket.emit('s2ca_login', 'internal/Login.html')
-
+      socket.emit('s2ca_login', 'internal/Login.html', settings.LoginMessage)
   })
   socket.on('Authenticated', (sessionID) => {
     console.log("Recieved "+sessionID, ", checking..")
@@ -64,7 +63,8 @@ io.on('connection', (socket) => {
       console.log(sessionID, "is valid!")
       socket.emit('greenlight')
     } else {
-
+      console.log(sessionID, "is invalid, kicking out user..")
+      socket.emit('banish')
     }
   })
 });

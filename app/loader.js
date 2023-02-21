@@ -19,6 +19,11 @@ socket.on('greenlight', function() {
     loadPage(0)
 })
 
+socket.on('banish', function() {
+    localStorage.setItem('_sdsession',''); 
+    window.location.reload()
+})
+
 socket.on('server_connected', function () {
     // _sdsession is session id
     addToHTMLlog("Connected! Checking for login status..")
@@ -34,9 +39,10 @@ socket.on('server_connected', function () {
     socket.emit('c2sr_login',localStorage.getItem("_sdsid"))
     }
 })
-socket.on('s2ca_login', function (s) {
+socket.on('s2ca_login', function (s,c) {
     addToHTMLlog('Request received by server, let\'s log in.')
     window.location.href = s;
+    localStorage.setItem('_sdl',c)
 })
 
 function addToHTMLlog(text) {
