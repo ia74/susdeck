@@ -2,7 +2,7 @@ var socket = io();
 
 addToHTMLlog('Waiting for server to respond to login request continuation')
 socket.on('server_connected', function () {
-    addToHTMLlog('Connected! Requesting login as '+localStorage.getItem("_sdsid")+'!')
+    addToHTMLlog('Connected! Requesting login as ' + localStorage.getItem("_sdsid") + '!')
     loaded = true;
     socket.emit('c2sr_login_cont', localStorage.getItem('_sdsid'))
     // document.getElementById('loading').style.display = "none"
@@ -15,14 +15,14 @@ socket.on('hiuser', function (s) {
         document.getElementById('login').style.display = 'block'
     }, 500);
 })
-socket.on('s2cs_login', (sessionID,g) => {
+socket.on('s2cs_login', (sessionID, g) => {
     // This session ID is actually kinda important
     localStorage.setItem('_sdsession', sessionID)
     window.location.href = g
 })
 
 function addToHTMLlog(text) {
-    document.getElementById('console').innerText += text+'\n';
+    document.getElementById('console').innerText += text + '\n';
 }
 
 function submit() {

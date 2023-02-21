@@ -6,55 +6,54 @@ var loggedin = false;
 
 addToHTMLlog('Waiting for server...')
 
-const allKeypress = document.getElementsByClassName('keypress');
-for (let i = 0; i < allKeypress.length; i++) {
-    allKeypress[i].onclick = (ev) => {
-        if (SoundOnPress) new Audio('press.mp3').play();
-        socket.emit('keypress', allKeypress[i].getAttribute('data-key'))
-    }
-}
-
-socket.on('greenlight', function() {
+socket.on('greenlight', function () {
     document.getElementById('loading').style.display = "none"
     loadPage(0)
+    const allKeypress = document.getElementsByClassName('keypress');
+    for (let i = 0; i < allKeypress.length; i++) {
+        allKeypress[i].onclick = (ev) => {
+            if (SoundOnPress) new Audio('press.mp3').play();
+            socket.emit('keypress', allKeypress[i].getAttribute('data-key'))
+        }
+    }
 })
 
-socket.on('banish', function() {
-    localStorage.setItem('_sdsession',''); 
+socket.on('banish', function () {
+    localStorage.setItem('_sdsession', '');
     window.location.reload()
 })
 
 socket.on('server_connected', function () {
     // _sdsession is session id
     addToHTMLlog("Connected! Checking for login status..")
-    if(localStorage.getItem('_sdsession')) {
+    if (localStorage.getItem('_sdsession')) {
         socket.emit('Authenticated', localStorage.getItem('_sdsession'))
         addToHTMLlog('Success! You\'re logged in.')
         loaded = true;
 
     } else {
-    addToHTMLlog('Not logged in, requesting login')
-    loaded = true;
-    localStorage.setItem('_sdsid',Math.random().toString().substring(2,5))
-    socket.emit('c2sr_login',localStorage.getItem("_sdsid"))
+        addToHTMLlog('Not logged in, requesting login')
+        loaded = true;
+        localStorage.setItem('_sdsid', Math.random().toString().substring(2, 5))
+        socket.emit('c2sr_login', localStorage.getItem("_sdsid"))
     }
 })
-socket.on('s2ca_login', function (s,c) {
+socket.on('s2ca_login', function (s, c) {
     addToHTMLlog('Request received by server, let\'s log in.')
     window.location.href = s;
-    localStorage.setItem('_sdl',c)
+    localStorage.setItem('_sdl', c)
 })
 
 function addToHTMLlog(text) {
-    document.getElementById('console').innerText += text+'\n';
+    document.getElementById('console').innerText += text + '\n';
 }
 
-setInterval(function() {
+setInterval(function () {
     // Auto refresh, you shouldn't be waiting to connect for longer than 500ms.
-    if(loaded) return;
+    if (loaded) return;
     addToHTMLlog('Connection attempt timed out. Retrying...')
     window.location.reload();
-},500)
+}, 500)
 
 
 function loadPage(pageNumber) {

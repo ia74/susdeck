@@ -44,7 +44,7 @@ var Pages = [
     },
     {
         name: 'Vine Boom',
-        key:'f16',
+        key: 'f16',
         icon: 'boom.png'
     },
     {

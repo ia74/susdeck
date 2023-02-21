@@ -6,12 +6,14 @@ For the soundboard, I recommend [Soundux](https://github.com/Soundux/Soundux).
 So far, Susdeck only officially supports iOS. 
 
 ## How do I use Susdeck?
-Clone the repo, run `npm i` and then `node .`.  
+Clone the repo, then change `Settings.js.default` to only have it's extension `.js`.  
+Next, modify the settings however you want, you can add authentication, a password, and a message for when somebody tries to login to your Susdeck.  
+Now, for the fun part. Run `npm i` and then `node .`.  
 Now your computer is hosting a server on port 3000. Get any iOS device and go to `yourlocalip:3000` in Safari.  
 Now, add the app to your home screen by pressing the share button.  
 Next, open the app on your device. It will be full screen.  
 **Susdeck is best viewed in landscape/horizontal mode.**  
-There are preloaded keys, for example `Shooting` will press F24 - it is meant to be a keybind in a soundboard.
+There are preloaded keys, for example `Shooting` will press Alt+F24 - it is meant to be a keybind in a soundboard.
 
 ## How do I make my own sounds/macros?
 Susdeck processes keys at the front-end, and it uses robotjs to press them on your computer.  
