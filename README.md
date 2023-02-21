@@ -1,9 +1,19 @@
-# susdeck
+![alt text](https://github.com/roizor/susdeck/blob/master/app/icons/susdeck.png?raw=true)
+
+# Susdeck
+
 Susdeck is a "soundboard" meant to model a Stream Deck with macro capabilities.  
 Susdeck does not play sounds, it is meant to control your computer with minimal ease like a Stream Deck.  
 You'll need to set up your own soundboard, keybinds, icons (if wanted) if you want a setup like mine.  
 For the soundboard, I recommend [Soundux](https://github.com/Soundux/Soundux).  
-So far, Susdeck only officially supports iOS. 
+So far, Susdeck only officially supports iOS.
+
+## What does it look like?
+Here's a preview of the UI:
+![Susdeck UI preview](https://github.com/roizor/susdeck/blob/master/demo/preview.png?raw=true)
+and here's a preview of the login screen:
+![Susdeck Login preview](https://github.com/roizor/susdeck/blob/master/demo/login.png?raw=true)
+
 
 ## How do I use Susdeck?
 Clone the repo, then change `Settings.js.default` to only have it's extension `.js`.  
