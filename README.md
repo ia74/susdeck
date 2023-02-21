@@ -8,6 +8,9 @@ You'll need to set up your own soundboard, keybinds, icons (if wanted) if you wa
 For the soundboard, I recommend [Soundux](https://github.com/Soundux/Soundux).  
 So far, Susdeck only officially supports iOS.
 
+## Join the Discord!
+[https://discord.gg/SdA2YfEb6R](https://discord.gg/SdA2YfEb6R)
+
 ## What does it look like?
 Here's a preview of the UI:
 ![Susdeck UI preview](https://github.com/roizor/susdeck/blob/master/demo/preview.png?raw=true)
