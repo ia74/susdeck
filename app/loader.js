@@ -9,13 +9,10 @@ addToHTMLlog('Waiting for server...')
 
 socket.on('greenlight', function () {
     document.getElementById('loading').style.display = "none"
-    loadPage(0)
-    const allKeypress = document.getElementsByClassName('keypress');
-    for (let i = 0; i < allKeypress.length; i++) {
-        allKeypress[i].onclick = (ev) => {
-            if (SoundOnPress) new Audio('press.mp3').play();
-            socket.emit('keypress', allKeypress[i].getAttribute('data-key'))
-        }
+    if(localStorage.getItem('_sdpage')) {
+        loadPage(localStorage.getItem('_sdpage'))
+    } else {
+        loadPage(0)
     }
 })
 
@@ -88,6 +85,7 @@ setInterval(function () {
 
 function loadPage(pageNumber) {
     currentPage = pageNumber;
+    localStorage.setItem('_sdpage',currentPage);
     keyList = [];
     const myNode = document.getElementById("keys");
     while (myNode.firstChild) {
@@ -97,7 +95,7 @@ function loadPage(pageNumber) {
     Pages[pageNumber].forEach(sound => {
         keyList.push(sound);
         let btn = document.createElement('button');
-        btn.className = "keypress";
+        btn.className = "keypress btxt";
         if (sound.key) {
             btn.setAttribute('data-key', sound.key);
         } else {
@@ -127,5 +125,11 @@ function loadPage(pageNumber) {
     keys.appendChild(reloadbtn);
     keys.appendChild(sbtn);
     keys.appendChild(susdeck);
-
+    const allKeypress = document.getElementsByClassName('keypress');
+    for (let i = 0; i < allKeypress.length; i++) {
+        allKeypress[i].onclick = (ev) => {
+            if (SoundOnPress) new Audio('press.mp3').play();
+            socket.emit('keypress', allKeypress[i].getAttribute('data-key'))
+        }
+    }
 }

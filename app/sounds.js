@@ -62,9 +62,12 @@ var Pages = [
     }],
     [
         {
-            name: 'Test page',
-            key: 'control',
-            icon: 'susdeck.png'
+            name: 'Ohio Sound',
+            keys: [
+                'alt',
+                'f23'
+            ],
+            icon: 'ohio.png'
         }
     ]
 ]
