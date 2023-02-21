@@ -55,7 +55,7 @@ io.on('connection', (socket) => {
     loginList.push(sid);
     console.log("User " + sid + " requested login!")
     // We'll confirm that we want to take user to the login page.
-    socket.emit('s2ca_login', 'internal/Login.html', settings.LoginMessage)
+    socket.emit('s2ca_login', 'assets/tools/Login.html', settings.LoginMessage)
   })
   socket.on('Authenticated', (sessionID) => {
     console.log("Recieved " + sessionID, ", checking..")

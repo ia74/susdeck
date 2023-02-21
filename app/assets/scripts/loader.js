@@ -102,7 +102,7 @@ function loadPage(pageNumber) {
             btn.setAttribute('data-key', txt);
         }
         if (sound.icon) {
-            btn.style.backgroundImage = "url('icons/" + sound.icon + "')"
+            btn.style.backgroundImage = "url('assets/icons/" + sound.icon + "')"
         }
         btn.innerText = sound.name;
         keys.appendChild(btn)
