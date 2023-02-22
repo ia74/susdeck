@@ -2,7 +2,8 @@
 
 # Susdeck
 
-Susdeck is a "soundboard" meant to model a Stream Deck with macro capabilities.  
+Susdeck is love. Susdeck is life. Susdeck is not a Stream Deck.
+Susdeck is a macro pad meant to model a Stream Deck with macro capabilities.  
 Susdeck does not play sounds, it is meant to control your computer with minimal ease like a Stream Deck.  
 You'll need to set up your own soundboard, keybinds, icons (if wanted) if you want a setup like mine.  
 For the soundboard, I recommend [Soundux](https://github.com/Soundux/Soundux).  
