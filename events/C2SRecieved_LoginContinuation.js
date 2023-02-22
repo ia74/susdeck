@@ -1,11 +1,10 @@
-import { Socket } from "socket.io"
-import C2SEvent from "./C2SEvent";
-import loginList from "../index"
+const settings = require('../Settings')
+const loginList = require('../index')
 
-let C2SRecieved_LoginContinuation: C2SEvent = {
+module.exports = {
     event: 'c2sr_login_cont',
-    callback: (socket: Socket, args: Array<string>) => {
-        let sid: number = Number(args[0]);
+    callback: (socket, args, loginList) => {
+        sid = args[0] 
         if (loginList.includes(sid)) {
             // Indeed it is the same user logging in.
             loginList.splice(loginList.indexOf(sid), 1)
@@ -16,6 +15,3 @@ let C2SRecieved_LoginContinuation: C2SEvent = {
         return "No continue login"
     }
 }
-
-
-export default C2SRecieved_LoginContinuation;
