@@ -40,6 +40,7 @@ io.on('connection', (socket) => {
   events.forEach(event => {
     socket.on(event.event, (args) => {
       let callback = event.callback(socket, args, loginList);
+      if(!callback) return;
       if(callback.startsWith('ValidateSession:')) {
         person = callback.split(":")[1];
         sessions.push(person);
