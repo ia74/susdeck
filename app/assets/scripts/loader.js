@@ -44,31 +44,31 @@ function addToHTMLlog(text) {
 
 let touchstartX = 0
 let touchendX = 2500
-    
+
 function checkDirection() {
-  if (touchendX < touchstartX) {
-    // go page up
-    if(Pages[currentPage+1]) {
-        loadPage(currentPage+1)
-    } else {
+    if (touchendX < touchstartX) {
+        // go page up
+        if (Pages[currentPage + 1]) {
+            loadPage(currentPage + 1)
+        } else {
+        }
     }
-  }
-  if (touchendX > touchstartX) {
-    // go page down
-    if(Pages[currentPage-1]) {
-        loadPage(currentPage-1)
-    } else {
+    if (touchendX > touchstartX) {
+        // go page down
+        if (Pages[currentPage - 1]) {
+            loadPage(currentPage - 1)
+        } else {
+        }
     }
-  }
 }
 
 document.addEventListener('touchstart', e => {
-  touchstartX = e.changedTouches[0].screenX
+    touchstartX = e.changedTouches[0].screenX
 })
 
 document.addEventListener('touchend', e => {
-  touchendX = e.changedTouches[0].screenX
-  checkDirection()
+    touchendX = e.changedTouches[0].screenX
+    checkDirection()
 })
 
 setInterval(function () {
@@ -81,7 +81,7 @@ setInterval(function () {
 
 function loadPage(pageNumber) {
     currentPage = pageNumber;
-    localStorage.setItem('_sdpage',currentPage);
+    localStorage.setItem('_sdpage', currentPage);
     keyList = [];
     const myNode = document.getElementById("keys");
     while (myNode.firstChild) {
@@ -114,7 +114,7 @@ function loadPage(pageNumber) {
     sbtn.innerText = "Stop All";
     let reloadbtn = document.createElement('button');
     reloadbtn.onclick = () => { window.location.reload() };
-    reloadbtn.className= "btxt";
+    reloadbtn.className = "btxt";
     reloadbtn.innerText = "Reload";
     let susdeck = document.createElement('a');
     susdeck.className = "button"

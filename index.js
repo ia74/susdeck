@@ -2,14 +2,24 @@ const ex = require('express');
 const app = ex();
 const http = require('http').Server(app);
 const rob = require('robotjs');
+const fs = require('fs');
 const io = require('socket.io')(http);
 const settings = require('./Settings')
 const port = process.env.PORT || 3000;
 
 let loginList = [];
 let sessions = [];
+let events = new Map();
 
 app.use('/', ex.static('app'))
+
+
+fs.readdirSync('events').forEach(file => {
+  file = "events/" + file;
+  let query = require('./' + file);
+  events.set(query.event, {event:query.event,callback:query.callback});
+  console.log("Added event", query.event)
+})
 
 io.on('connection', (socket) => {
   console.log('Connected to client @ ' + new Date())
@@ -27,35 +37,14 @@ io.on('connection', (socket) => {
       rob.keyTap(keys)
     }
   });
-
-  socket.on('c2sr_login_cont', (sid) => {
-    if (loginList.includes(sid)) {
-      // Indeed it is the same user logging in.
-      loginList.splice(loginList.indexOf(sid), 1)
-      // Hello
-      console.log("User " + sid + " is continuing login")
-      socket.emit('hiuser')
-    }
-  })
-  socket.on('c2sd_login', (password) => {
-    console.log('Recieved password request!')
-    if (password == settings.Password) {
-      console.log('Password is valid!')
-      // Congratulations, now let's assign a session id.
-      sid = require('crypto').randomBytes(8).toString('hex');
-      console.log('Adding ' + sid + " to session ids")
-      sessions.push(sid)
-      socket.emit('s2cs_login', sid, "../")
-
-    }
-  })
-  socket.on('c2sr_login', (sid) => {
-    if (!settings.UseAuthentication) { socket.emit('greenlight'); return; }
-    // ID recieved, load into memory so we know it's the same user logging in.
-    loginList.push(sid);
-    console.log("User " + sid + " requested login!")
-    // We'll confirm that we want to take user to the login page.
-    socket.emit('s2ca_login', 'assets/tools/Login.html', settings.LoginMessage)
+  events.forEach(event => {
+    socket.on(event.event, (args) => {
+      let callback = event.callback(socket, args, loginList);
+      if(callback.startsWith('ValidateSession:')) {
+        person = callback.split(":")[1];
+        sessions.push(person);
+      }
+    })
   })
   socket.on('Authenticated', (sessionID) => {
     console.log("Recieved " + sessionID, ", checking..")
@@ -68,6 +57,7 @@ io.on('connection', (socket) => {
     }
   })
 });
+
 
 http.listen(port, () => {
   console.log(`Socket.IO server running at http://localhost:${port}/`);
