@@ -14,7 +14,7 @@ app.use('/', ex.static('app'))
 io.on('connection', (socket) => {
   console.log('Connected to client @ ' + new Date())
 
-  setTimeout(function () { socket.emit('server_connected') }, 150);
+  setTimeout(function () { socket.emit('server_connected'); console.log("Sent user connection success message") }, 150);
   socket.on('keypress', keys => {
     if (keys.includes('{')) {
       keys.split('{').forEach(key => {
@@ -33,14 +33,14 @@ io.on('connection', (socket) => {
       // Indeed it is the same user logging in.
       loginList.splice(loginList.indexOf(sid), 1)
       // Hello
-      console.log("User " + sid + " acknowledged login continuation.")
+      console.log("User " + sid + " is continuing login")
       socket.emit('hiuser')
     }
   })
   socket.on('c2sd_login', (password) => {
-    console.log('Recieved password', password)
+    console.log('Recieved password request!')
     if (password == settings.Password) {
-      console.log(password + " at " + settings.Password)
+      console.log('Password is valid!')
       // Congratulations, now let's assign a session id.
       sid = require('crypto').randomBytes(8).toString('hex');
       console.log('Adding ' + sid + " to session ids")
