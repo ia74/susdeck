@@ -1,23 +1,27 @@
-const ex = require('express');
-const app = ex();
-const http = require('http').Server(app);
-const rob = require('robotjs');
-const fs = require('fs');
-const io = require('socket.io')(http);
-const settings = require('./Settings')
+import express = require("express");
+import httpLib = require('http');
+import * as rob from 'robotjs';
+import * as fs from 'fs';
+import { Server } from "socket.io";
+import Settings from "./Settings";
+
+const app = express();
+const http = new httpLib.Server(app);
+const io = new Server(http);
 const port = process.env.PORT || 3000;
 
-let loginList = [];
-let sessions = [];
+let loginList: Array<number> = [];
+let sessions: Array<number> = [];
+
 let events = new Map();
 
-app.use('/', ex.static('app'))
-
+app.use('/', express.static('app'))
 
 fs.readdirSync('events').forEach(file => {
+  if(file.includes('.map')) return;
   file = "events/" + file;
   let query = require('./' + file);
-  events.set(query.event, {event:query.event,callback:query.callback});
+  events.set(query.event, { event: query.event, callback: query.callback });
   console.log("Added event", query.event)
 })
 
@@ -27,7 +31,7 @@ io.on('connection', (socket) => {
   setTimeout(function () { socket.emit('server_connected'); console.log("Sent user connection success message") }, 150);
   socket.on('keypress', keys => {
     if (keys.includes('{')) {
-      keys.split('{').forEach(key => {
+      keys.split('{').forEach((key: string) => {
         if (key == '') return;
         key = key.split('}')[0];
         rob.keyToggle(key, "down")
@@ -38,10 +42,10 @@ io.on('connection', (socket) => {
     }
   });
   events.forEach(event => {
-    socket.on(event.event, (args) => {
+    socket.on(event.event, (args: any) => {
       let callback = event.callback(socket, args, loginList);
-      if(callback.startsWith('ValidateSession:')) {
-        person = callback.split(":")[1];
+      if (callback.startsWith('ValidateSession:')) {
+        let person: number = callback.split(":")[1];
         sessions.push(person);
       }
     })
@@ -62,3 +66,5 @@ io.on('connection', (socket) => {
 http.listen(port, () => {
   console.log(`Socket.IO server running at http://localhost:${port}/`);
 });
+
+export default loginList;

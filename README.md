@@ -22,7 +22,7 @@ and here's a preview of the login screen:
 ## How do I use Susdeck?
 Clone the repo, then change `Settings.js.default` to only have it's extension `.js`.  
 Next, modify the settings however you want, you can add authentication, a password, and a message for when somebody tries to login to your Susdeck.  
-Now, for the fun part. Run `npm i` and then `node .`.  
+Now, for the fun part. Run `npm i` and then `npx tsc` and finally `node build/index.js`.  
 Now your computer is hosting a server on port 3000. Get any iOS device and go to `yourlocalip:3000` in Safari.  
 Now, add the app to your home screen by pressing the share button.  
 Next, open the app on your device. It will be full screen.  

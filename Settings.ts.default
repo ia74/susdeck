@@ -7,4 +7,4 @@ const Settings = {
     LoginMessage: 'Hey there, please login', // This message will show for users when they try to login (below "Login to Susdeck")
 }
 
-module.exports = Settings;
+export default Settings;
