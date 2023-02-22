@@ -7,16 +7,6 @@ var currentPage = 0;
 
 addToHTMLlog('Waiting for server...')
 
-socket.on('greenlight', function () {
-    document.getElementById('loading').style.display = "none"
-    loadPage(0)
-})
-
-socket.on('banish', function () {
-    localStorage.setItem('_sdsession', '');
-    window.location.reload()
-})
-
 socket.on('server_connected', function () {
     // _sdsession is session id
     addToHTMLlog("Connected! Checking for login status..")
@@ -32,43 +22,21 @@ socket.on('server_connected', function () {
         socket.emit('c2sr_login', localStorage.getItem("_sdsid"))
     }
 })
+
 socket.on('s2ca_login', function (s, c) {
     addToHTMLlog('Request received by server, let\'s log in.')
     window.location.href = s;
     localStorage.setItem('_sdl', c)
 })
 
-function addToHTMLlog(text) {
-    document.getElementById('console').innerText += text + '\n';
-}
-
-let touchstartX = 0
-let touchendX = 2500
-
-function checkDirection() {
-    if (touchendX < touchstartX) {
-        // go page up
-        if (Pages[currentPage + 1]) {
-            loadPage(currentPage + 1)
-        } else {
-        }
-    }
-    if (touchendX > touchstartX) {
-        // go page down
-        if (Pages[currentPage - 1]) {
-            loadPage(currentPage - 1)
-        } else {
-        }
-    }
-}
-
-document.addEventListener('touchstart', e => {
-    touchstartX = e.changedTouches[0].screenX
+socket.on('greenlight', function () {
+    document.getElementById('loading').style.display = "none"
+    loadPage(0)
 })
 
-document.addEventListener('touchend', e => {
-    touchendX = e.changedTouches[0].screenX
-    checkDirection()
+socket.on('banish', function () {
+    localStorage.setItem('_sdsession', '');
+    window.location.reload()
 })
 
 setInterval(function () {
@@ -78,7 +46,9 @@ setInterval(function () {
     window.location.reload();
 }, 500)
 
-
+function addToHTMLlog(text) {
+    document.getElementById('console').innerText += text + '\n';
+}
 function loadPage(pageNumber) {
     currentPage = pageNumber;
     localStorage.setItem('_sdpage', currentPage);
@@ -118,7 +88,7 @@ function loadPage(pageNumber) {
     reloadbtn.innerText = "Reload";
     let susdeck = document.createElement('a');
     susdeck.className = "button"
-    susdeck.style.backgroundImage = "url('icons/susdeck.png')"
+    susdeck.style.backgroundImage = "url('assets/icons/susdeck.png')"
     keys.appendChild(reloadbtn);
     keys.appendChild(sbtn);
     keys.appendChild(susdeck);
