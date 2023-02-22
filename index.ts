@@ -4,6 +4,7 @@ import * as rob from 'robotjs';
 import * as fs from 'fs';
 import { Server } from "socket.io";
 import Settings from "./Settings";
+import C2SEvent from "./events/C2SEvent";
 
 const app = express();
 const http = new httpLib.Server(app);
@@ -15,14 +16,13 @@ let sessions: Array<number> = [];
 
 let events = new Map();
 
-app.use('/', express.static('app'))
+app.use('/', express.static('../app'))
 
 fs.readdirSync('events').forEach(file => {
-  if(file.includes('.map')) return;
+  if(file.includes('.map') || file.includes('C2SEvent')) return;
   file = "events/" + file;
-  let query = require('./' + file);
+  let query: C2SEvent = require('./' + file);
   events.set(query.event, { event: query.event, callback: query.callback });
-  console.log("Added event", query.event)
 })
 
 io.on('connection', (socket) => {
