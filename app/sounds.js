@@ -8,8 +8,8 @@
 var SoundOnPress = true;
 // true for yes, false for no.
 
-var Pages = [
-    [{
+var Sounds = [
+    {
         name: 'Shooting',
         keys: [
             'alt',
@@ -59,15 +59,13 @@ var Pages = [
             'tab',
         ],
         icon: 'alt_tab.png'
-    }],
-    [
-        {
-            name: 'Ohio Sound',
-            keys: [
-                'alt',
-                'f23'
-            ],
-            icon: 'ohio.png'
-        }
-    ]
+    },
+    {
+        name: 'Ohio Sound',
+        keys: [
+            'alt',
+            'f23'
+        ],
+        icon: 'ohio.png'
+    }
 ]
