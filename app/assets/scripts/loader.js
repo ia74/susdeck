@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 const socket = io()
 const keys = document.getElementById('keys')
 let keyList = []
@@ -34,7 +35,11 @@ socket.on('greenlight', function () {
 
 socket.on('banish', function () {
   localStorage.setItem('_sdsession', '')
-  window.location.reload()
+  document.getElementById('keys').remove()
+  document.getElementById('loading').style.display = 'block'
+  document.getElementById('loading').innerHTML = `<h1>Susdeck</h1>
+  <p>Your session expired, please login again.</p>
+  <button onclick="localStorage.setItem('_sdsession',''); window.location.replace(window.location.href)">Login</button>`
 })
 
 setInterval(function () {
@@ -44,10 +49,10 @@ setInterval(function () {
   window.location.reload()
 }, 500)
 
-function addToHTMLlog(text) {
+function addToHTMLlog (text) {
   document.getElementById('console').innerText += text + '\n'
 }
-function loadPage(pageNumber) {
+function loadPage (pageNumber) {
   currentPage = pageNumber
   localStorage.setItem('_sdpage', currentPage)
   keyList = []
