@@ -22,7 +22,6 @@ fs.readdirSync('events').forEach(function (file) {
 
 io.on('connection', function (socket) {
   console.log('Connected to client @ ' + new Date())
-
   setTimeout(function () {
     socket.emit('server_connected')
     console.log('Sent user connection success message')
