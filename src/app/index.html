@@ -9,10 +9,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Susdeck">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/web/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/web/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/web/favicon-16x16.png">
+  <link rel="mask-icon" href="assets/icons/web/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
   <link rel="manifest" href="/manifest.webmanifest">
@@ -34,19 +34,19 @@
   <div id="keys"></div>
   <div id="root"></div>
   <script>
-      var root = document.querySelector('#root');
-      if (navigator && navigator.serviceWorker) {
-          caches.open('azwcache').then(function (cache) {
-              cache.keys().then(function (keys) {
-                  root.innerHTML =
-                      '<ul>' +
-                          keys.map(function(key) {
-                              return '<li><a href="' + key.url + '">' + key.url + '</a></li>';
-                          }).join('') +
-                      '</ul>';
-              });
-          });
-      }
+    var root = document.querySelector('#root');
+    if (navigator && navigator.serviceWorker) {
+      caches.open('azwcache').then(function (cache) {
+        cache.keys().then(function (keys) {
+          root.innerHTML =
+            '<ul>' +
+            keys.map(function (key) {
+              return '<li><a href="' + key.url + '">' + key.url + '</a></li>';
+            }).join('') +
+            '</ul>';
+        });
+      });
+    }
   </script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="sounds.js"></script>
