@@ -11,9 +11,9 @@ const loginList = []
 const sessions = []
 const events = new Map()
 
-app.use('/', ex.static('app'))
+app.use('/', ex.static('./src/app'))
 
-fs.readdirSync('events').forEach(function (file) {
+fs.readdirSync('./src/events').forEach(function (file) {
   file = 'events/' + file
   const query = require('./' + file)
   events.set(query.event, { callback: query.callback, event: query.event })
