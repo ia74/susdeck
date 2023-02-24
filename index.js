@@ -50,6 +50,7 @@ io.on('connection', function (socket) {
       }
     })
   })
+  socket.on('keepalive', () => { socket.emit('keepalive') })
   socket.on('Authenticated', function (sessionID) {
     console.log('Recieved ' + sessionID, ', checking..')
     if (sessions.includes(sessionID)) {
