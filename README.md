@@ -1,4 +1,4 @@
-![alt text](https://github.com/roizor/susdeck/blob/master/app/assets/icons/susdeck.png?raw=true)
+![alt text](https://github.com/roizor/susdeck/blob/master/src/app/assets/icons/susdeck.png?raw=true)
 
 # Susdeck
 
