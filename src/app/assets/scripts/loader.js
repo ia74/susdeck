@@ -22,10 +22,11 @@ socket.on('server_connected', function () {
   }
 })
 
-socket.on('s2ca_login', function (s, c) {
+socket.on('s2ca_login', function (s, c, n) {
   addToHTMLlog('Request received by server, let\'s log in.')
-  window.location.href = s
   localStorage.setItem('_sdl', c)
+  localStorage.setItem('_sdyn', n)
+  window.location.href = s
 })
 
 socket.on('greenlight', function () {
