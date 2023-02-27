@@ -6,6 +6,7 @@ const rob = require('robotjs')
 const fs = require('fs')
 const io = require('socket.io')(http)
 const port = process.env.PORT || 3000
+const getNetworkInterfaces = require('./network')
 
 const loginList = []
 const sessions = []
@@ -62,8 +63,11 @@ io.on('connection', function (socket) {
     }
   })
 })
+
 module.exports = loginList
 
 http.listen(port, function () {
-  console.log(`Socket.IO server running at http://localhost:${port}/`)
+  console.log('Susdeck Companion is running!')
+  if (getNetworkInterfaces().Ethernet) { console.log('Go to ' + getNetworkInterfaces().Ethernet[0] + ':3000 on your mobile device ') }
+  if (getNetworkInterfaces()['Wi-Fi']) { console.log('Go to ' + getNetworkInterfaces()['Wi-Fi'][0] + ':3000 on your mobile device ') }
 })

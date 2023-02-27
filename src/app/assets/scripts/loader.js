@@ -61,7 +61,11 @@ function loadPage (pageNumber) {
   while (myNode.firstChild) {
     myNode.removeChild(myNode.lastChild)
   }
-
+  // eslint-disable-next-line no-undef
+  Pages[pageNumber].push({
+    name: 'Stop All',
+    key: 'f19'
+  })
   // eslint-disable-next-line no-undef
   Pages[pageNumber].forEach(sound => {
     keyList.push(sound)
@@ -83,10 +87,6 @@ function loadPage (pageNumber) {
     keys.appendChild(btn)
   })
 
-  const sbtn = document.createElement('button')
-  sbtn.className = 'keypress btxt'
-  sbtn.setAttribute('data-key', 'f19')
-  sbtn.innerText = 'Stop All'
   const reloadbtn = document.createElement('button')
   reloadbtn.onclick = () => { window.location.reload() }
   reloadbtn.className = 'btxt'
@@ -95,7 +95,6 @@ function loadPage (pageNumber) {
   susdeck.className = 'button'
   susdeck.style.backgroundImage = "url('assets/icons/susdeck.png')"
   keys.appendChild(reloadbtn)
-  keys.appendChild(sbtn)
   keys.appendChild(susdeck)
   const allKeypress = document.getElementsByClassName('keypress')
   for (let i = 0; i < allKeypress.length; i++) {

@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-undef
 const socket = io()
 
-addToHTMLlog('Waiting for server to respond to login request continuation')
+addToHTMLlog('Waiting for Companion to respond to login request continuation')
 socket.on('server_connected', function () {
-  addToHTMLlog('Connected! Requesting login as ' + localStorage.getItem('_sdsid') + '!')
+  addToHTMLlog('Connected to Susdeck Companion')
   // eslint-disable-next-line no-undef
   loaded = true
   socket.emit('c2sr_login_cont', localStorage.getItem('_sdsid'))
