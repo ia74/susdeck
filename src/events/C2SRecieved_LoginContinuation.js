@@ -10,6 +10,7 @@ module.exports = {
       socket.emit('hiuser')
       return 'User ' + sid + ' is continuing login'
     }
+    socket.emit('hiuser', 'uhhhlol')
     return 'No continue login'
   }
 }

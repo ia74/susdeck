@@ -10,6 +10,10 @@ socket.on('server_connected', function () {
   // document.getElementById('loading').style.display = "none"
 })
 socket.on('hiuser', function (s) {
+  if (s === 'uhhhlol') {
+    localStorage.setItem('_sdsession', '')
+    window.location.replace('../../index.html')
+  }
   addToHTMLlog('Loading login form..')
   setTimeout(() => {
     document.getElementById('loading').style.display = 'none'
@@ -18,6 +22,12 @@ socket.on('hiuser', function (s) {
     document.getElementById('login').style.display = 'block'
   }, 500)
 })
+
+socket.on('banish', function () {
+  localStorage.setItem('_sdsession', '')
+  window.location.replace('../index.html')
+})
+
 socket.on('s2cs_login', (sessionID, g) => {
   // This session ID is actually kinda important
   localStorage.setItem('_sdsession', sessionID)
