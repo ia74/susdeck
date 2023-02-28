@@ -1,3 +1,11 @@
+# Susdeck has moved!
+Susdeck has moved to a new repo to make the URL a bit more memorable, as well for other Susdeck related projects.  
+You can see the new repo at [Susdeck/Susdeck](https://github.com/Susdeck/Susdeck)  
+Thanks!
+<br />
+<br />
+<br />
+
 ![alt text](https://github.com/roizor/susdeck/blob/master/src/app/assets/icons/susdeck.png?raw=true)
 
 # Susdeck
